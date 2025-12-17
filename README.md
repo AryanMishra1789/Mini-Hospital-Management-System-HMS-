@@ -4,13 +4,13 @@ Django-based hospital management web app for doctor availability and patient app
 
 ## Features
 
-- ✅ **User Authentication**: Signup/login for doctors and patients with role-based access
-- ✅ **Doctor Availability**: Doctors can create and manage time slots
-- ✅ **Patient Booking**: Patients can view available slots and book appointments
-- ✅ **Atomic Booking**: Race condition prevention using database locking
-- ✅ **Email Notifications**: Serverless Lambda function for signup/booking emails
-- ✅ **Google Calendar Integration**: OAuth2-based calendar event creation for appointments
-- ✅ **Admin Panel**: Django admin for managing users, slots, and bookings
+**User Authentication**: Signup/login for doctors and patients with role-based access
+**Doctor Availability**: Doctors can create and manage time slots
+**Patient Booking**: Patients can view available slots and book appointments
+**Atomic Booking**: Race condition prevention using database locking
+**Email Notifications**: Serverless Lambda function for signup/booking emails
+**Google Calendar Integration**: OAuth2-based calendar event creation for appointments
+**Admin Panel**: Django admin for managing users, slots, and bookings
 
 ## Tech Stack
 
@@ -262,14 +262,6 @@ python manage.py shell
 - Role-based access control enforced
 - OAuth2 for calendar access
 - Environment variables for secrets
-
-## License
-
-MIT
-
-## Contributors
-
-Built for internship selection task - Mini Hospital Management System
 
 ## Support
 
