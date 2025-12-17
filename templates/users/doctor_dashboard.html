@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Doctor Dashboard</h2>
+<p>
+  <a href="{% url 'my_slots' %}">Manage My Slots</a> |
+  <a href="{% url 'create_slot' %}">Create Slot</a>
+</p>
+
+<h3>Upcoming Slots</h3>
+{% if slots %}
+  <table border="1" cellpadding="6">
+    <tr>
+      <th>Start</th>
+      <th>End</th>
+      <th>Booked?</th>
+    </tr>
+    {% for s in slots %}
+      <tr>
+        <td>{{ s.start }}</td>
+        <td>{{ s.end }}</td>
+        <td>{{ s.is_booked|yesno:'Yes,No' }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>No slots yet.</p>
+{% endif %}
+
+<h3>Recent Bookings</h3>
+{% if recent_bookings %}
+  <table border="1" cellpadding="6">
+    <tr>
+      <th>Patient</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Created</th>
+    </tr>
+    {% for b in recent_bookings %}
+      <tr>
+        <td>{{ b.patient.get_full_name|default:b.patient.username }}</td>
+        <td>{{ b.slot.start }}</td>
+        <td>{{ b.slot.end }}</td>
+        <td>{{ b.created_at }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>No bookings yet.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Patient Dashboard</h2>
+<p>
+  <a href="/">Browse Available Slots</a>
+</p>
+
+<h3>My Recent Bookings</h3>
+{% if my_bookings %}
+  <table border="1" cellpadding="6">
+    <tr>
+      <th>Doctor</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Created</th>
+    </tr>
+    {% for b in my_bookings %}
+      <tr>
+        <td>{{ b.slot.doctor.get_full_name|default:b.slot.doctor.username }}</td>
+        <td>{{ b.slot.start }}</td>
+        <td>{{ b.slot.end }}</td>
+        <td>{{ b.created_at }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>No bookings yet.</p>
+{% endif %}
+{% endblock %}

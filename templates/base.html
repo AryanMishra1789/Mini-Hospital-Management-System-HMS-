@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini HMS</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+      }
+      nav {
+        background-color: #007bff;
+        color: white;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 0.5rem;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      ul li {
+        background: #007bff;
+        color: white;
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div>
+        <a href="/">Home</a>
+        {% if user.is_authenticated %}
+          <span>Hi {{ user.username }}</span>
+          {% if user.is_doctor %}
+            <a href="{% url 'users:doctor_dashboard' %}">Doctor Dashboard</a>
+            <a href="{% url 'my_slots' %}">My Slots</a>
+          {% endif %}
+          {% if user.is_patient %}
+            <a href="{% url 'users:patient_dashboard' %}">Patient Dashboard</a>
+          {% endif %}
+          <a href="/users/logout/">Logout</a>
+          <a href="/admin/">Admin</a>
+        {% else %}
+          <a href="/users/login/">Login</a>
+          <a href="/users/signup/">Sign up</a>
+        {% endif %}
+      </div>
+    </nav>
+    <div class="container">
+      {% if messages %}
+        <ul>
+        {% for m in messages %}
+          <li>{{ m }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>

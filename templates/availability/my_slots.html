@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>My Time Slots</h1>
+<a href="{% url 'create_slot' %}">Create New Slot</a>
+<ul>
+{% for s in slots %}
+  <li>{{ s.start }} - {{ s.end }} {% if s.is_booked %}(booked){% endif %}</li>
+{% empty %}
+  <li>No slots yet</li>
+{% endfor %}
+</ul>
+{% endblock %}

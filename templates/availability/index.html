@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Doctors & Available Slots</h1>
+{% for d in doctors %}
+  <h3>{{ d.doctor.get_full_name }} ({{ d.doctor.username }})</h3>
+  <ul>
+  {% for s in d.slots %}
+    <li>
+      {{ s.start }} - {{ s.end }} {% if s.is_booked %}(booked){% endif %}
+      {% if not s.is_booked and s.is_future %}
+        {% if user.is_authenticated %}
+          {% if user.is_patient %}
+            <form method="post" action="{% url 'create_booking' s.id %}" style="display:inline">{% csrf_token %}
+              <button type="submit">Book</button>
+            </form>
+          {% endif %}
+        {% else %}
+          <a href="/users/login/">Login to book</a>
+        {% endif %}
+      {% endif %}
+    </li>
+  {% empty %}
+    <li>No upcoming slots</li>
+  {% endfor %}
+  </ul>
+{% endfor %}
+{% endblock %}
